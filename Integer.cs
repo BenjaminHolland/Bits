@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Phi.Numerics.Bits;
+//This is a comment that I've made to show Jon about git.
 namespace Phi.Numerics {
     public static class Integer {
 
