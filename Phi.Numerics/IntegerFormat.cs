@@ -1,9 +1,9 @@
-﻿using Phi.Core;
+﻿//using Phi.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Phi.Hashing;
+//using Phi.Hashing;
 namespace Phi.Numerics {
     /// <summary>
     /// Describes a type of integer.
@@ -89,7 +89,7 @@ namespace Phi.Numerics {
             BitWidth = bitWidth;
             Signed = signed;
         }
-
+        /*TODO: Reimplememnt this method
         public override Int32 GetHashCode() {
             return HashCodeBuilder.Create.Immutable()
                 .Mutate(ByteOrder)
@@ -97,7 +97,7 @@ namespace Phi.Numerics {
                 .Mutate(BitWidth)
                 .Mutate(Signed)
                 .Complete();
-        }
+        }*/
 
         public override Boolean Equals(Object obj) {
             if (obj == null) {
