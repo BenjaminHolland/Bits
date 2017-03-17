@@ -119,7 +119,7 @@ namespace Phi.Numerics.Bits {
         /// <summary>
         /// The underlying byte array.
         /// </summary>
-        public Byte[] Source { get; private set; }
+        public Byte[] Source { get; internal set; }
 
         /// <summary>
         /// The length of the view in bits.

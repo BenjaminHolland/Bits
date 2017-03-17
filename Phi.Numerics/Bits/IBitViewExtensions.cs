@@ -86,7 +86,16 @@ namespace Phi.Numerics.Bits {
                 pos += size;
             }
         }
-        
+
+        /// <summary>
+        /// Merges the underlying source arrays of a group of bit windows. 
+        /// </summary>
+        /// <param name="this"></param>
+        /// <returns>The new source array.</returns>
+        public static Byte[] Flow(this IEnumerable<IBitWindow> @this)
+        {
+            throw new NotImplementedException();
+        }
                 
         /// <summary>
         /// Get the bytes of this IBitWindow as though the bits in the window were a single N-bit integer with a layout that matches
