@@ -1,4 +1,4 @@
-﻿
+﻿using Phi.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace Phi.Numerics.BitView {
     /// <summary>
     /// Provides bit indexing for a given bit/byte order.
     /// </summary>
-    //[Todo("Add support for serialization.")]
+    [Todo("Add support for serialization.")]
     public class EndianBitIndexer : IBitIndexer {
         public static readonly EndianBitIndexer BigByteBigBitIndexer = new EndianBitIndexer(Endianness.Big, Endianness.Big);
         public static readonly EndianBitIndexer BigByteLittleBitIndexer = new EndianBitIndexer(Endianness.Big, Endianness.Little);
@@ -47,9 +47,9 @@ namespace Phi.Numerics.BitView {
             BitOrder = bitOrder;
         }
 
-        //[Todo("Reduce stack allocations?")]
-        //[Todo("Reduce branch complexity.")]
-        //[Todo("Add Caching behavior for this method.")]
+        [Todo("Reduce stack allocations?")]
+        [Todo("Reduce branch complexity.")]
+        [Todo("Add Caching behavior for this method.")]
         public Int32 GetIndexForBitWithPower(Int32 bitPower, Int32 valueBitWidth) {
             /**
              * THOUGHTS

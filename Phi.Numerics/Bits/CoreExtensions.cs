@@ -11,7 +11,7 @@ namespace Phi.Numerics.BitView {
     /// </summary>
     [Todo("Add Compatibility With System.Collections.BitArray")]
     [Todo("Add Compatibility with System.Numerics.BigInteger")]
-    public static class SystemExtensions {
+    public static class CoreExtensions {
 
         [Todo("Make sure this is the right indexer to use.")]
         public static IBitView ToBitView(this String @this,Encoding encoding) {

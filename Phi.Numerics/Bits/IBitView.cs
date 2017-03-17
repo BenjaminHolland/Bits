@@ -1,4 +1,4 @@
-﻿
+﻿using Phi.Core;
 using System;
 using System.Collections.Generic;
 
@@ -10,7 +10,7 @@ namespace Phi.Numerics.BitView {
     /// Allows enumeration as though underlying bytes were a bitset in little endian bit order. 
     /// </summary>
     /// 
-    //TODO: Add IReadOnlyList<Boolean>
+    [Todo("Add IReadOnlyList<Boolean>")]
     public interface IBitView : IEnumerable<Boolean> {
        
         /// <summary>
