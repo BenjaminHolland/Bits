@@ -2,59 +2,85 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System.Linq;
-using System.Diagnostics;
-//using Phi.Structure;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 using Phi.Numerics.Bits;
-namespace Phi.Numerics.Testing {
+namespace Phi.Numerics.Testing
+{
     [TestClass]
-    public class BitWidnowTests {
+    public class BitWidnowTests
+    {
+        [TestMethod]
+        [TestCategory("Manual Validation")]
+        public void PrintPowerMappings()
+        {
+            IBitIndexer indexer;
+            indexer = EndianBitIndexer.BigByteBigBitIndexer;
+            Console.WriteLine("BB " +String.Join(",", Enumerable.Range(0, 16).Select(i => indexer.GetIndexForBitWithPower(i, 16))));
+
+            indexer = EndianBitIndexer.BigByteLittleBitIndexer;
+            Console.WriteLine("BL "+String.Join(",", Enumerable.Range(0, 16).Select(i => indexer.GetIndexForBitWithPower(i, 16))));
+
+            indexer = EndianBitIndexer.LittleByteLittleBitIndexer;
+            Console.WriteLine("LL " + String.Join(",", Enumerable.Range(0, 16).Select(i => indexer.GetIndexForBitWithPower(i, 16))));
+
+            indexer = EndianBitIndexer.LittleByteBigBitIndexer;
+            Console.WriteLine("LB "+String.Join(",", Enumerable.Range(0, 16).Select(i => indexer.GetIndexForBitWithPower(i, 16))));
+        }
 
         [TestMethod]
         [ExpectedArgumentException(typeof(ArgumentOutOfRangeException), "length")]
-        public void Ctor_NegativeBitLength() {
+        public void Ctor_NegativeBitLength()
+        {
             BitWindow window = new BitWindow(-1);
         }
         [TestMethod]
         [ExpectedArgumentException(typeof(ArgumentOutOfRangeException), "length")]
-        public void Ctor_ZeroBitLength() {
+        public void Ctor_ZeroBitLength()
+        {
             BitWindow window = new BitWindow(0);
         }
         [TestMethod]
         [ExpectedArgumentException(typeof(ArgumentNullException), "source")]
-        public void Ctor_NullBytes() {
+        public void Ctor_NullBytes()
+        {
             BitWindow window = new BitWindow(null);
         }
         [TestMethod]
         [ExpectedArgumentException(typeof(ArgumentException), "source")]
-        public void Ctor_ZeroBytes() {
+        public void Ctor_ZeroBytes()
+        {
             BitWindow window = new BitWindow(new byte[] { });
         }
         [TestMethod]
         [ExpectedArgumentException(typeof(ArgumentOutOfRangeException), "offset")]
-        public void Ctor_NegativeOffset() {
+        public void Ctor_NegativeOffset()
+        {
             BitWindow window = new BitWindow(new byte[1], -1, 8, EndianBitIndexer.LittleByteBigBitIndexer);
         }
 
         [TestMethod]
         [ExpectedArgumentException(typeof(ArgumentOutOfRangeException), "length")]
-        public void Ctor_InsufficientBitsInSourceBecauseOfOffset() {
+        public void Ctor_InsufficientBitsInSourceBecauseOfOffset()
+        {
             BitWindow window = new BitWindow(new byte[1], 7, 8, EndianBitIndexer.LittleByteBigBitIndexer);
         }
         [TestMethod]
         [ExpectedArgumentException(typeof(ArgumentOutOfRangeException), "length")]
-        public void Ctor_InsufficientBitsInSource() {
+        public void Ctor_InsufficientBitsInSource()
+        {
             BitWindow window = new BitWindow(new byte[1], 0, 16, EndianBitIndexer.LittleByteBigBitIndexer);
         }
 
         [TestMethod]
         [ExpectedArgumentException(typeof(ArgumentNullException), "indexer")]
-        public void Ctor_NullIndexer() {
+        public void Ctor_NullIndexer()
+        {
             BitWindow window = new BitWindow(new byte[1], 0, 8, null);
         }
 
         [TestMethod]
-        public void Read_BitWindow_In32_NegativeOne() {
+        public void Read_BitWindow_In32_NegativeOne()
+        {
             BitWindow window = new BitWindow(32);
             for (int bitIdx = 0; bitIdx < window.Length; bitIdx++) {
                 window[bitIdx] = true;
@@ -69,7 +95,8 @@ namespace Phi.Numerics.Testing {
         }
 
         [TestMethod]
-        public void Read_BitWindow_Int32_EnsureByteOrder() {
+        public void Read_BitWindow_Int32_EnsureByteOrder()
+        {
             Int32 expectedValue = 0xff00;
             BitWindow window = new BitWindow(32);
 
@@ -86,7 +113,8 @@ namespace Phi.Numerics.Testing {
         }
 
         [TestMethod]
-        public void Read_BitWindow_In32_NegativeTwo() {
+        public void Read_BitWindow_In32_NegativeTwo()
+        {
             BitWindow window = new BitWindow(32);
             for (int bitIdx = 0; bitIdx < window.Length; bitIdx++) {
                 window[bitIdx] = true;
@@ -102,7 +130,8 @@ namespace Phi.Numerics.Testing {
         }
 
         [TestMethod]
-        public void Read_BitWindow_In32_One() {
+        public void Read_BitWindow_In32_One()
+        {
             BitWindow window = new BitWindow(8);
             window[0] = true;
             byte[] intBuffer = new byte[4];
@@ -115,7 +144,8 @@ namespace Phi.Numerics.Testing {
         }
 
         [TestMethod]
-        public void Extension_Crystalize_Int32_NegativeTwo() {
+        public void Extension_Crystalize_Int32_NegativeTwo()
+        {
             Byte[] source = new byte[3];
             BitWindow window = new BitWindow(source, 3, 5, EndianBitIndexer.NativeBitIndexer);
             for (int bitIdx = 0; bitIdx < window.Length; bitIdx++) {
@@ -126,7 +156,8 @@ namespace Phi.Numerics.Testing {
 
         }
         [TestMethod]
-        public void Extension_Crystalize_Int32_EnsureByteOrder() {
+        public void Extension_Crystalize_Int32_EnsureByteOrder()
+        {
             byte[] source = new byte[5];
             BitWindow window = new BitWindow(source, 3, 16, EndianBitIndexer.NativeBitIndexer);
 
@@ -135,11 +166,12 @@ namespace Phi.Numerics.Testing {
             }
 
             byte[] intBuffer = window.Crystalize(IntegerFormat.S32);
-            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(unchecked((Int32)0xffffff00), BitConverter.ToInt32(intBuffer, 0));
+            Assert.AreEqual(unchecked((Int32)0xffffff00), BitConverter.ToInt32(intBuffer, 0));
         }
 
         [TestMethod]
-        public void Extension_Shatter() {
+        public void Extension_Shatter()
+        {
             byte[] source = new byte[] { 18, 52 };
             UInt32[] results = new uint[] { 1, 2, 3, 4 };
             var view = new BitWindow(source);
