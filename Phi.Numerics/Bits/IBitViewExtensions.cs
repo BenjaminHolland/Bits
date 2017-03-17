@@ -33,7 +33,7 @@ namespace Phi.Numerics.Bits {
         
          public static void ReadFrom(this IBitWindow view,Byte[] src,Int32 srcOffset,Int32 dstOffset,Int32 length,IBitIndexer indexer) {
             IBitWindow srcWindow = new BitWindow(src,indexer);
-            view.WriteTo(srcWindow,srcOffset,dstOffset,length);
+            view.ReadFrom(srcWindow,srcOffset,dstOffset,length);
         }
 
         /// <summary>
