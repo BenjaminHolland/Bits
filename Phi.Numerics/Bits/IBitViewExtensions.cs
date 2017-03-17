@@ -1,4 +1,4 @@
-﻿using Phi.Core;
+﻿
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace Phi.Numerics.BitView {
     /// </summary>
     /// 
 
-    [Todo("Add Shatter(IBitView,[MARSHALABLESTRUCTURE])")]
+    //[Todo("Add Shatter(IBitView,[MARSHALABLESTRUCTURE])")]
     public static class IBitViewExtensions {
         private static readonly HashSet<IntegerFormat> SupportedIntegerFormats = new HashSet<IntegerFormat>() {
             IntegerFormat.S8,

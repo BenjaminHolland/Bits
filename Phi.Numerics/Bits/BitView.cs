@@ -1,4 +1,4 @@
-﻿using Phi.Core;
+﻿//using Phi.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Phi.Numerics.BitView {
     /// Provides bit-level referential access to an array of bytes. 
     /// Allows enumeration as though underlying bytes were a bitset in little endian bit order. 
     /// </summary>
-    [Todo("Add support for serialization.")]
+    //[Todo("Add support for serialization.")]
     public class BitView : IBitView {
 
         private static void EnsureProperConstruction(Int32 length, IBitIndexer indexer) {
