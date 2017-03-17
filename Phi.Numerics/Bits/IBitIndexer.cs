@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phi.Numerics.Bits {
+namespace Phi.Numerics.BitView {
+    
+    /// <summary>
+    /// Defines an interface for an object that can map form bit powers to bit indecies.
+    /// </summary>
     public interface IBitIndexer {
-
         /// <summary>
         /// Determines the bit index of a bit with a given power.
         /// </summary>
