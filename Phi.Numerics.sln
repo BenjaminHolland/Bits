@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phi.Numerics", "Phi.Numerics\Phi.Numerics.csproj", "{92E49FBD-45CD-4B53-8C36-1B91026447EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phi.Numerics.Tests", "Phi.Numerics.Tests\Phi.Numerics.Tests.csproj", "{1B9E5732-7AA0-4652-88FD-CFED7DCEBC48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{92E49FBD-45CD-4B53-8C36-1B91026447EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92E49FBD-45CD-4B53-8C36-1B91026447EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92E49FBD-45CD-4B53-8C36-1B91026447EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B9E5732-7AA0-4652-88FD-CFED7DCEBC48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B9E5732-7AA0-4652-88FD-CFED7DCEBC48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B9E5732-7AA0-4652-88FD-CFED7DCEBC48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B9E5732-7AA0-4652-88FD-CFED7DCEBC48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

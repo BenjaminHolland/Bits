@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phi.Numerics.BitView {
+namespace Phi.Numerics.Bits {
 
     /// <summary>
     /// Provides Extended IBitView Capabilities.
@@ -26,13 +26,13 @@ namespace Phi.Numerics.BitView {
             IntegerFormat.U64
         };
         
-        public static void WriteTo(this IBitView view,Byte[] dst, Int32 srcOffset, Int32 dstOffset, Int32 length, IBitIndexer indexer) {
-            IBitView dstWindow = new BitView(dst, indexer);
+        public static void WriteTo(this IBitWindow view,Byte[] dst, Int32 srcOffset, Int32 dstOffset, Int32 length, IBitIndexer indexer) {
+            IBitWindow dstWindow = new BitWindow(dst, indexer);
             view.WriteTo(dstWindow, srcOffset, dstOffset, length);
         }
         
-         public static void ReadFrom(this IBitView view,Byte[] src,Int32 srcOffset,Int32 dstOffset,Int32 length,IBitIndexer indexer) {
-            IBitView srcWindow = new BitView(src,indexer);
+         public static void ReadFrom(this IBitWindow view,Byte[] src,Int32 srcOffset,Int32 dstOffset,Int32 length,IBitIndexer indexer) {
+            IBitWindow srcWindow = new BitWindow(src,indexer);
             view.WriteTo(srcWindow,srcOffset,dstOffset,length);
         }
 
@@ -43,7 +43,7 @@ namespace Phi.Numerics.BitView {
         /// <param name="offset">The bit offset relative to the start of the existing view.</param>
         /// <param name="format">A format to follow.</param>
         /// <returns></returns>
-        public static IBitView Crack(this IBitView @this,Int32 offset,IntegerFormat format) {
+        public static IBitWindow Crack(this IBitWindow @this,Int32 offset,IntegerFormat format) {
             return @this.Crack(offset, format.BitWidth, format.GetIndexer());
         }
 
@@ -55,8 +55,8 @@ namespace Phi.Numerics.BitView {
         /// <param name="length">The length of the new view.</param>
         /// <param name="indexer">The bit indexer to use.</param>
         /// <returns></returns>
-        public static IBitView Crack(this IBitView view, Int32 offset, Int32 length, IBitIndexer indexer) {
-            return new BitView(view.Source, view.Offset + offset, length, indexer);
+        public static IBitWindow Crack(this IBitWindow view, Int32 offset, Int32 length, IBitIndexer indexer) {
+            return new BitWindow(view.Source, view.Offset + offset, length, indexer);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Phi.Numerics.BitView {
         /// <param name="this">The existing view.</param>
         /// <param name="formats">The sequence of formats that the new views will have.</param>
         /// <returns></returns>
-        public static IEnumerable<IBitView> Shatter(this IBitView @this,IEnumerable<IntegerFormat> formats) {
+        public static IEnumerable<IBitWindow> Shatter(this IBitWindow @this,IEnumerable<IntegerFormat> formats) {
             Int32 pos = 0;
             foreach(var fmt in formats) {
                 yield return @this.Crack(pos, fmt.BitWidth, fmt.GetIndexer());
@@ -79,7 +79,7 @@ namespace Phi.Numerics.BitView {
         /// <param name="this">The existing view.</param>
         /// <param name="sizes">The sequence of view sizes.</param>
         /// <returns></returns>
-        public static IEnumerable<IBitView> Shatter(this IBitView @this,IEnumerable<Int32> sizes) {
+        public static IEnumerable<IBitWindow> Shatter(this IBitWindow @this,IEnumerable<Int32> sizes) {
            Int32 pos = 0;
             foreach (var size in sizes) {
                 yield return @this.Crack(pos, size,@this.Indexer);
@@ -98,7 +98,7 @@ namespace Phi.Numerics.BitView {
         /// <param name="integerSize">The byte width of the resulting integer.</param>
         /// <param name="signed">Whether or not the resulting integer is signed.</param>
         /// <returns></returns>
-        public static Byte[] Crystalize(this IBitView @this,IntegerFormat format) {
+        public static Byte[] Crystalize(this IBitWindow @this,IntegerFormat format) {
             if (@this == null) {
                 throw new ArgumentNullException(nameof(@this));
             }
@@ -110,7 +110,7 @@ namespace Phi.Numerics.BitView {
                 throw new InvalidOperationException();
             }
             Byte[] integerBuffer = new Byte[format.BitWidth / 8];
-            BitView integerView = new BitView(integerBuffer, new EndianBitIndexer(format.ByteOrder, format.BitOrder));
+            BitWindow integerView = new BitWindow(integerBuffer, new EndianBitIndexer(format.ByteOrder, format.BitOrder));
             @this.WriteTo(integerView, 0, 0, @this.Length);
             if (format.Signed) {
                 if (@this[@this.Length - 1]) {

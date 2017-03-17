@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Phi.Numerics.BitView
+namespace Phi.Numerics.Bits
 {
     public static class IntegerFormatExtensions
     {

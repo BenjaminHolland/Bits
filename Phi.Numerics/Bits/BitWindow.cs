@@ -6,14 +6,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-namespace Phi.Numerics.BitView {
+namespace Phi.Numerics.Bits {
 
     /// <summary>
     /// Provides bit-level referential access to an array of bytes. 
     /// Allows enumeration as though underlying bytes were a bitset in little endian bit order. 
     /// </summary>
     //[Todo("Add support for serialization.")]
-    public class BitView : IBitView {
+    public class BitWindow : IBitWindow {
 
         private static void EnsureProperConstruction(Int32 length, IBitIndexer indexer) {
             if (length <= 0) {
@@ -140,7 +140,7 @@ namespace Phi.Numerics.BitView {
         /// Construct a view of bits.
         /// </summary>
         /// <param name="length">The number of bits in the view.</param>
-        public BitView(Int32 length)
+        public BitWindow(Int32 length)
             : this(length, EndianBitIndexer.NativeBitIndexer) {
         }
 
@@ -149,7 +149,7 @@ namespace Phi.Numerics.BitView {
         /// </summary>
         /// <param name="length">The number of bits in the view.</param>
         /// <param name="indexer">The <see cref="IBitIndexer"/> to use.</param>
-        public BitView(Int32 length, IBitIndexer indexer) {
+        public BitWindow(Int32 length, IBitIndexer indexer) {
             EnsureProperConstruction(length, indexer);
             Initialize(length, indexer);
         }
@@ -160,7 +160,7 @@ namespace Phi.Numerics.BitView {
         /// <param name="source">The sequence of bytes.</param>
         /// <param name="offset">The length of the view.</param>
         /// <param name="length">The offset of the view.</param>
-        public BitView(Byte[] source, Int32 offset, Int32 length)
+        public BitWindow(Byte[] source, Int32 offset, Int32 length)
             : this(source, offset, length, EndianBitIndexer.NativeBitIndexer) {
         }
 
@@ -171,7 +171,7 @@ namespace Phi.Numerics.BitView {
         /// <param name="length">The length of the view.</param>
         /// <param name="offset">The offset of the view.</param>
         /// <param name="indexer">An <see cref="IBitIndexer"/> to use to order the bits.</param>
-        public BitView(Byte[] source, Int32 offset, Int32 length, IBitIndexer indexer) {
+        public BitWindow(Byte[] source, Int32 offset, Int32 length, IBitIndexer indexer) {
             EnsureProperConstruction(source, offset, length, indexer);
             Initialize(source, offset, length, indexer);
         }
@@ -181,7 +181,7 @@ namespace Phi.Numerics.BitView {
         /// </summary>
         /// <param name="source">The sequence of bytes.</param>
         /// <param name="indexer">An <see cref="IBitIndexer"/> to use to order the bits.</param>
-        public BitView(Byte[] source, IBitIndexer indexer) {
+        public BitWindow(Byte[] source, IBitIndexer indexer) {
             EnsureProperConstruction(source, indexer);
             Initialize(source, indexer);
         }
@@ -190,7 +190,7 @@ namespace Phi.Numerics.BitView {
         /// Construct a view over a sequence of bytes.
         /// </summary>
         /// <param name="source">The sequence of bytes.</param>
-        public BitView(Byte[] source) : this(source, EndianBitIndexer.NativeBitIndexer) {
+        public BitWindow(Byte[] source) : this(source, EndianBitIndexer.NativeBitIndexer) {
 
         }
 
@@ -215,7 +215,7 @@ namespace Phi.Numerics.BitView {
         /// <param name="srcOffset">Where to start reading from.</param>
         /// <param name="dstOffset">Where to start writing to.</param>
         /// <param name="length">The number of bits to transfer.</param>
-        public void WriteTo(IBitView dst, Int32 srcOffset, Int32 dstOffset, Int32 length) {
+        public void WriteTo(IBitWindow dst, Int32 srcOffset, Int32 dstOffset, Int32 length) {
             if (srcOffset < 0) {
                 throw new ArgumentOutOfRangeException(nameof(srcOffset));
             }
@@ -248,7 +248,7 @@ namespace Phi.Numerics.BitView {
         /// <param name="srcOffset">Where to start reading from.</param>
         /// <param name="dstOffset">Where to start writing to.</param>
         /// <param name="length">The number of bits to transfer.</param>
-        public void ReadFrom(IBitView src, Int32 srcOffset, Int32 dstOffset, Int32 length) {
+        public void ReadFrom(IBitWindow src, Int32 srcOffset, Int32 dstOffset, Int32 length) {
 
             if (srcOffset < 0) {
                 throw new ArgumentOutOfRangeException(nameof(srcOffset));

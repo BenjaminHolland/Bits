@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phi.Numerics.BitView {
+namespace Phi.Numerics.Bits {
 
     /// <summary>
     /// Provides bit indexing for a given bit/byte order.

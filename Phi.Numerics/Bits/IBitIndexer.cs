@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phi.Numerics.BitView {
+namespace Phi.Numerics.Bits {
     
     /// <summary>
     /// Defines an interface for an object that can map form bit powers to bit indecies.

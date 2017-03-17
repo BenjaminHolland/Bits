@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace Phi.Numerics.BitView {
+namespace Phi.Numerics.Bits {
 
     /// <summary>
     /// Provides bit-level referential access to an array of bytes. 
@@ -11,7 +11,7 @@ namespace Phi.Numerics.BitView {
     /// </summary>
     /// 
     //[Todo("Add IReadOnlyList<Boolean>")]
-    public interface IBitView : IEnumerable<Boolean> {
+    public interface IBitWindow : IEnumerable<Boolean> {
        
         /// <summary>
         /// The underlying byte array.
@@ -50,7 +50,7 @@ namespace Phi.Numerics.BitView {
         /// <param name="srcOffset">Where to start reading from.</param>
         /// <param name="dstOffset">Where to start writing to.</param>
         /// <param name="length">The number of bits to transfer.</param>
-        void WriteTo(IBitView dst, Int32 srcOffset, Int32 dstOffset, Int32 length);
+        void WriteTo(IBitWindow dst, Int32 srcOffset, Int32 dstOffset, Int32 length);
 
         
         /// <summary>
@@ -60,7 +60,7 @@ namespace Phi.Numerics.BitView {
         /// <param name="srcOffset">Where to start reading from.</param>
         /// <param name="dstOffset">Where to start writing to.</param>
         /// <param name="length">The number of bits to transfer.</param>
-        void ReadFrom(IBitView src, Int32 srcOffset, Int32 dstOffset, Int32 length);
+        void ReadFrom(IBitWindow src, Int32 srcOffset, Int32 dstOffset, Int32 length);
 
 
     }
