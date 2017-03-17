@@ -88,6 +88,16 @@ namespace Phi.Numerics.Bits {
         }
 
         /// <summary>
+        /// Merges the underlying source arrays of a group of bit windows, using the given byte[] as the new source. 
+        /// </summary>
+        /// <param name="this"></param>
+        /// <param name="newSource"></param>
+        public static void Flow(this IEnumerable<IBitWindow> @this,ref Byte[] newSource)
+        {
+
+        }
+
+        /// <summary>
         /// Merges the underlying source arrays of a group of bit windows. 
         /// </summary>
         /// <param name="this"></param>
