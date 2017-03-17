@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//using Phi.Hashing;
 namespace Phi.Numerics {
     /// <summary>
     /// Describes a type of integer.
@@ -89,15 +88,15 @@ namespace Phi.Numerics {
             BitWidth = bitWidth;
             Signed = signed;
         }
-        /*TODO: Reimplememnt this method
+        
         public override Int32 GetHashCode() {
-            return HashCodeBuilder.Create.Immutable()
-                .Mutate(ByteOrder)
-                .Mutate(BitOrder)
-                .Mutate(BitWidth)
-                .Mutate(Signed)
-                .Complete();
-        }*/
+            int value = 31415;
+            value = value * 7 + ByteOrder.GetHashCode();
+            value = value * 7 + BitOrder.GetHashCode();
+            value = value * 7 + BitWidth.GetHashCode();
+            value = value * 7 + Signed.GetHashCode();
+            return value;
+        }
 
         public override Boolean Equals(Object obj) {
             if (obj == null) {
